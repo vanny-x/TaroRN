@@ -4,10 +4,10 @@ name: Assemble Ios Release
 # 触发工作流程的事件
 on:
   push:
-    branches: [ master ]
-    tags: [ v* ]
+    branches: [master]
+    tags: [v*]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   workflow_dispatch:
 
@@ -66,7 +66,7 @@ jobs:
         run: |
           yarn build:rn --platform ios
       - name: Upload Taro React Native Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: taro-ios-bundle
           path: ${{ github.workspace }}/ios/main.jsbundle
@@ -102,7 +102,7 @@ jobs:
           bundle update
           bundle exec fastlane build_release
       - name: Upload Ios Products
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-${{ env.BUILD_TYPE }}
           path: |

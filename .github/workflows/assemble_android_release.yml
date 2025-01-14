@@ -4,10 +4,10 @@ name: Assemble Android Release
 # 触发工作流程的事件
 on:
   push:
-    branches: [ master ]
-    tags: [ v* ]
+    branches: [master]
+    tags: [v*]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   workflow_dispatch:
 
@@ -70,7 +70,7 @@ jobs:
         run: |
           yarn build:rn --platform android
       - name: Upload Taro React Native Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: taro-android-bundle
           path: ${{ github.workspace }}/android/app/src/main/assets/index.android.bundle
@@ -99,7 +99,7 @@ jobs:
             -Pkeystore_key_alias='${{ env.KEYSTORE_KEY_ALIAS }}' \
             -Pkeystore_key_password='${{ env.KEYSTORE_KEY_PASSWORD }}'
       - name: Upload Android Products
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-${{ env.BUILD_TYPE }}
           path: ${{ github.workspace }}/android/app/build/outputs/apk/${{ env.BUILD_TYPE }}/app-${{ env.BUILD_TYPE }}.apk
